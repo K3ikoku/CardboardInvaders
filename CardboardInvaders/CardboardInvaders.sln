@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardboardInvaders", "CardboardInvaders.csproj", "{00887CD1-CB3D-0E6A-F4C1-4C537DAF887B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardboardInvaders.Editor", "CardboardInvaders.Editor.csproj", "{15CD29A7-CD39-CD40-5963-AD9B3C4EB19E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00887CD1-CB3D-0E6A-F4C1-4C537DAF887B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00887CD1-CB3D-0E6A-F4C1-4C537DAF887B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00887CD1-CB3D-0E6A-F4C1-4C537DAF887B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00887CD1-CB3D-0E6A-F4C1-4C537DAF887B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15CD29A7-CD39-CD40-5963-AD9B3C4EB19E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15CD29A7-CD39-CD40-5963-AD9B3C4EB19E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15CD29A7-CD39-CD40-5963-AD9B3C4EB19E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15CD29A7-CD39-CD40-5963-AD9B3C4EB19E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
