@@ -475,7 +475,7 @@ public class GvrViewer : MonoBehaviour {
     device.profileChanged = false;
     device.backButtonPressed = false;
   }
-
+    
   /// Resets the tracker so that the user's current direction becomes forward.
   public void Recenter() {
     device.Recenter();
@@ -485,7 +485,7 @@ public class GvrViewer : MonoBehaviour {
   public void ShowSettingsDialog() {
     device.ShowSettingsDialog();
   }
-
+    
 #if !UNITY_HAS_GOOGLEVR || UNITY_EDITOR
   /// Add a StereoController to any camera that does not have a Render Texture (meaning it is
   /// rendering to the screen).
