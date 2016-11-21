@@ -113,13 +113,20 @@
     <Compile Include="Assets\GoogleVR\Legacy\Editor\StereoControllerEditor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Audio\Audio Temp.txt" />
     <None Include="Assets\GoogleVR\Distortion\GvrDistortion.cginc" />
     <None Include="Assets\GoogleVR\Legacy\Resources\SolidColor.shader" />
     <None Include="Assets\GoogleVR\Legacy\Resources\UnlitTexture.shader" />
     <None Include="Assets\GoogleVR\Resources\UI\GvrReticleShader.shader" />
+    <None Include="Assets\Materials\Material Temp.txt" />
+    <None Include="Assets\Models\Models temp.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest-Cardboard.xml" />
     <None Include="Assets\Plugins\Android\AndroidManifest-Daydream.xml" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+    <None Include="Assets\Prefabs\Prefab Temp.txt" />
+    <None Include="Assets\Scenes\Scenes Temp.txt" />
+    <None Include="Assets\Scripts\Script Temp.txt" />
+    <None Include="Assets\Textures\Texture Temp.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
