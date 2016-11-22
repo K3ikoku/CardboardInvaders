@@ -17,18 +17,18 @@ public class Blackboard
         set { m_stats.CurrentTargetType = value; }
     }
     
-    public int MaxHP
+    public float MaxHP
     {
         get { return m_stats.MaxHp; }
     }
 
-    public int Health
+    public float Health
         {
         get { return m_stats.Health; }
         set { m_stats.Health = value; }
     }
 
-    public int Damage
+    public float Damage
     {
         get { return m_stats.Damage; }
         set { m_stats.Damage = value; }

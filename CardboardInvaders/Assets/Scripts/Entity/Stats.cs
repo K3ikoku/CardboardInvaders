@@ -15,9 +15,9 @@ public class Stats : MonoBehaviour
 
     [SerializeField] private TargetType m_currentTargetType = TargetType.UNDEFINED;
 
-    [SerializeField] private int m_maxHP;
-    [SerializeField] private int m_currentHealth;
-    [SerializeField] private int m_damage;
+    [SerializeField] private float m_maxHP;
+    [SerializeField] private float m_currentHealth;
+    [SerializeField] private float m_damage;
 
     [SerializeField] private float m_moveSpeed;
     [SerializeField] private float m_runSpeed;
@@ -77,19 +77,19 @@ public class Stats : MonoBehaviour
         set { m_currentTargetType = value; }
     }
     
-    public int MaxHp
+    public float MaxHp
     {
         get { return m_maxHP; }
         set { m_maxHP = value; }
     }
 
-    public int Health
+    public float Health
     {
         get { return m_currentHealth; }
         set { m_currentHealth = value; }
     }
 
-    public int Damage
+    public float Damage
     {
         get { return m_damage; }
         set { m_damage = value; }
