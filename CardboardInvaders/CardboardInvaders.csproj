@@ -265,6 +265,7 @@
     <Compile Include="Assets\Scripts\AI\Composites\Selector.cs" />
     <Compile Include="Assets\Scripts\AI\Composites\Sequence.cs" />
     <Compile Include="Assets\Scripts\Entity\Entity.cs" />
+    <Compile Include="Assets\Scripts\Entity\Grunk\BaseGrunk.cs" />
     <Compile Include="Assets\Scripts\Entity\Grunk\BlueGrunk.cs" />
     <Compile Include="Assets\Scripts\Entity\Grunk\GreenGrunk.cs" />
     <Compile Include="Assets\Scripts\Entity\Grunk\RedGrunk.cs" />

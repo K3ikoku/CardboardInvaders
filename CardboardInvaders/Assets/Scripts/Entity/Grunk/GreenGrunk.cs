@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent (typeof (Stats))]
-public class GreenGrunk : Entity
+public class GreenGrunk : BaseGrunk
 {
     private BehaviorTree m_bt;
     private Blackboard m_bb;
@@ -18,6 +18,8 @@ public class GreenGrunk : Entity
         m_root = new Selector();
 
         m_bt.SetRoot(m_root);
+
+        //TODO: Create rest of behavior tree
         
     }
 }
