@@ -16,7 +16,7 @@ public class SetRandomLocation : Behavior
         //Debug.Log("Inside SetRandomLoc");
         //Debug.Log("Setting new random location");
 
-        if (bb.CurrentTargetType != Stats.TargetType.RANDOM)
+        if (bb.CurrentTargetType != Stats.TargetType.RANDOM_LOCATION)
         {
             if (!m_isPathing && !m_foundPath)
             {
@@ -37,7 +37,7 @@ public class SetRandomLocation : Behavior
                 bb.Path = m_path;
                 m_path = null;
                 m_status = Status.SUCCESS;
-                bb.CurrentTargetType = Stats.TargetType.RANDOM;
+                bb.CurrentTargetType = Stats.TargetType.RANDOM_LOCATION;
 
 
             }

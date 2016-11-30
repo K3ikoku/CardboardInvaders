@@ -4,156 +4,149 @@ using Pathfinding;
 
 public class Blackboard
 {
-    private Stats m_stats;
+    private Stats stats;
 
     public void SetStats(Stats stats)
     {
-        m_stats = stats;
+        this.stats = stats;
     }
 
     public Stats.TargetType CurrentTargetType
     {
-        get { return m_stats.CurrentTargetType; }
-        set { m_stats.CurrentTargetType = value; }
+        get { return stats.CurrentTargetType; }
+        set { stats.CurrentTargetType = value; }
     }
     
     public float MaxHP
     {
-        get { return m_stats.MaxHp; }
+        get { return stats.MaxHp; }
     }
 
     public float Health
         {
-        get { return m_stats.Health; }
-        set { m_stats.Health = value; }
+        get { return stats.Health; }
+        set { stats.Health = value; }
     }
 
     public float Damage
     {
-        get { return m_stats.Damage; }
-        set { m_stats.Damage = value; }
+        get { return stats.Damage; }
+        set { stats.Damage = value; }
+    }
+
+    public float AttackSpeed
+    {
+        get { return stats.AttackSpeed; }
     }
     
     public float MoveSpeed
     {
-        get { return m_stats.MoveSpeed; }
-        set { m_stats.MoveSpeed = value; }
+        get { return stats.MoveSpeed; }
+        set { stats.MoveSpeed = value; }
     }
 
     public float RunSpeed
     {
-        get { return m_stats.RunSpeed; }
+        get { return stats.RunSpeed; }
     }
 
     public float StandardSpeed
     {
-        get { return m_stats.StandardSpeed; }
+        get { return stats.StandardSpeed; }
     }
 
     public float WalkSpeed
     {
-        get { return m_stats.WalkSpeed; }
+        get { return stats.WalkSpeed; }
     }
 
     public float MaxSpotDistance
     {
-        get { return m_stats.MaxSpotDistance; }
-        set { m_stats.MaxSpotDistance = value; }
+        get { return stats.MaxSpotDistance; }
     }
 
     public float MaxAttackDistance
     {
-        get { return m_stats.MaxAttackDistance; }
-        set { m_stats.MaxAttackDistance = value; }
+        get { return stats.MaxAttackDistance; }
     }
 
-    public float AttackTimer
-    {
-        get { return m_stats.AttackTimer; }
-        set { m_stats.AttackTimer = value; }
-    }
 
     public float IdleTimer
     {
-        get { return m_stats.IdleTimer; }
-        set { m_stats.IdleTimer = value; }
+        get { return stats.IdleTimer; }
+        set { stats.IdleTimer = value; }
     }
 
     public float IdleCD
     {
-        get { return m_stats.IdleCD; }
-        set { m_stats.IdleCD = value; }
+        get { return stats.IdleCD; }
+        set { stats.IdleCD = value; }
     }
 
     public float FleeHealthThreshold
     {
-        get { return m_stats.FleeHealthThreshold; }
+        get { return stats.FleeHealthThreshold; }
     }
 
     public bool CanWalk
     {
-        get { return m_stats.CanWalk; }
-        set { m_stats.CanWalk = value; }
+        get { return stats.CanWalk; }
+        set { stats.CanWalk = value; }
     }
 
     public bool CanIdle
     {
-        get { return m_stats.CanIdle; }
-        set { m_stats.CanIdle = value; }
+        get { return stats.CanIdle; }
+        set { stats.CanIdle = value; }
     }
 
     public bool IsIdling
     {
-        get { return m_stats.IsIdling; }
-        set { m_stats.IsIdling = value; }
+        get { return stats.IsIdling; }
+        set { stats.IsIdling = value; }
     }
 
     public Vector3 Target
     {
-        get { return m_stats.Target; }
-        set { m_stats.Target = value; }
+        get { return stats.Target; }
+        set { stats.Target = value; }
     }
 
     public Vector3 Pos
     {
-        get { return m_stats.Pos; }
+        get { return stats.Pos; }
     }
 
     public Quaternion Rotation
     {
-        get { return m_stats.Rotation; }
-        set { m_stats.Rotation = value; }
+        get { return stats.Rotation; }
+        set { stats.Rotation = value; }
     }
 
     public Seeker Seeker
     {
-        get { return m_stats.Seeker; }
+        get { return stats.Seeker; }
     }
     
     public Path Path
     {
-        get { return m_stats.Path; }
-        set { m_stats.Path = value; }
+        get { return stats.Path; }
+        set { stats.Path = value; }
     }
 
     public CharacterController CharController
     {
-        get { return m_stats.CharController; }
+        get { return stats.CharController; }
     }
-
-    //public Shoot Shoot
-    //{
-    //    get { return m_stats.Shoot; }
-    //}
 
     public GameObject Player
     {
-        get { return m_stats.Player; }
+        get { return stats.Player; }
     }
 
     public Rigidbody Rigidbody
     {
-        get { return m_stats.Rigidbody; }
+        get { return stats.Rigidbody; }
     }
 
 }

@@ -2,44 +2,53 @@
 using System.Collections;
 using Pathfinding;
 
+
+
+
 public class Stats : MonoBehaviour
 {
-
     public enum TargetType
     {
-        UNDEFINED, 
-        RANDOM,
-        PLAYER
+        UNDEFINED,
+        RANDOM_LOCATION,
+        PLAYER,
+        HUMAN
     }
-    
 
+
+
+    [Header("Health")]
+    [SerializeField] private float maxHP;
+    [SerializeField] private float currentHealth;
+    [Tooltip("The amount of hp loss until they flee")][SerializeField][Range(0, 100)] private float fleeHealthThreshhold;
+
+    [Header("Attack")]
+    [SerializeField] private float damage;
+    [SerializeField] private float attackSpeed;
+
+    [Header("Movement")]
+    [Tooltip("The current movespeed. Change run, base or walk speed")][SerializeField] private float moveSpeed;
+    [SerializeField] private float runSpeed;
+    [SerializeField] private float baseSpeed;
+    [SerializeField] private float walkSpeed;
+    [Header("Targeting")]
     [SerializeField] private TargetType m_currentTargetType = TargetType.UNDEFINED;
+    [SerializeField] private Vector3 target;
+    [SerializeField] private float maxSpotDistance;
+    [SerializeField] private float maxAttackDistance;
 
-    [SerializeField] private float m_maxHP;
-    [SerializeField] private float m_currentHealth;
-    [SerializeField] private float m_damage;
+    [Header("Parameters for the behavior tree")]
+    [SerializeField] private bool canWalk = true;
+    [SerializeField] private bool isIdling = false;
+    [SerializeField] private bool canIdle = true;
+    [SerializeField] private float idleTimer;
+    [SerializeField] private float idleCD;
 
-    [SerializeField] private float m_moveSpeed;
-    [SerializeField] private float m_runSpeed;
-    [SerializeField] private float m_standardSpeed;
-    [SerializeField] private float m_walkSpeed;
-    [SerializeField] private float m_maxSpotDistance;
-    [SerializeField] private float m_maxAttackDistance;
-    [SerializeField] private float m_attackTimer;
-    [SerializeField] private float m_idleTimer;
-    [SerializeField] private float m_idleCD;
-    [SerializeField] private float m_fleeHealthThreshhold;
-
-    [SerializeField] private bool m_canWalk = true;
-    [SerializeField] private bool m_isIdling = false;
-    [SerializeField] private bool m_canIdle = true;
-
-    [SerializeField] private Vector3 m_target;
-    [SerializeField] private Seeker m_seeker;
-    [SerializeField] private Path m_path;
-    [SerializeField] private CharacterController m_controller;
-    [SerializeField] private GameObject m_player;
-    [SerializeField] private Rigidbody m_rigidBody;
+    private Seeker seeker;
+    private Path path;
+    private CharacterController characterController;
+    private GameObject player;
+    private Rigidbody rigidBody;
 
 
     void Awake()
@@ -47,24 +56,24 @@ public class Stats : MonoBehaviour
         if (gameObject.tag != "Player")
         {
             Health = MaxHp;
-            m_seeker = GetComponent<Seeker>();
+            seeker = GetComponent<Seeker>();
             if (Seeker == null)
             {
                 Debug.Log("Missing seeker");
             }
 
-            m_controller = GetComponent<CharacterController>();
+            characterController = GetComponent<CharacterController>();
             if (CharController == null)
             {
                 Debug.Log("Missing character controller");
             }
-            m_player = GameObject.FindGameObjectWithTag("Player");
-            if (m_player == null)
+            player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null)
             {
                 Debug.Log("Missing player");
             }
-            m_rigidBody = GetComponent<Rigidbody>();
-            if (m_rigidBody == null)
+            rigidBody = GetComponent<Rigidbody>();
+            if (rigidBody == null)
             {
                 Debug.Log("Missing Rigidbody");
             }
@@ -79,98 +88,95 @@ public class Stats : MonoBehaviour
     
     public float MaxHp
     {
-        get { return m_maxHP; }
-        set { m_maxHP = value; }
+        get { return maxHP; }
     }
 
     public float Health
     {
-        get { return m_currentHealth; }
-        set { m_currentHealth = value; }
+        get { return currentHealth; }
+        set { currentHealth = value; }
     }
 
     public float Damage
     {
-        get { return m_damage; }
-        set { m_damage = value; }
+        get { return damage; }
+        set { damage = value; }
+    }
+    public float AttackSpeed
+    {
+        get { return attackSpeed; }
     }
 
     public float MoveSpeed
     {
-        get { return m_moveSpeed; }
-        set { m_moveSpeed = value; }
+        get { return moveSpeed; }
+        set { moveSpeed = value; }
     }
 
     public float RunSpeed
     {
-        get { return m_runSpeed; }
+        get { return runSpeed; }
     }
 
     public float StandardSpeed
     {
-        get { return m_standardSpeed; }
+        get { return baseSpeed; }
     }
 
     public float WalkSpeed
     {
-        get { return m_walkSpeed; }
+        get { return walkSpeed; }
     }
     
     public float MaxSpotDistance
     {
-        get { return m_maxSpotDistance; }
-        set { m_maxSpotDistance = value; }
+        get { return maxSpotDistance; }
     }
 
     public float MaxAttackDistance
     {
-        get { return m_maxAttackDistance; }
-        set { m_maxAttackDistance = value; }
+        get { return maxAttackDistance; }
     }
 
     public float IdleTimer
     {
-        get { return m_idleTimer; }
-        set { m_idleTimer = value; }
+        get { return idleTimer; }
+        set { idleTimer = value; }
     }
 
     public float IdleCD
     {
-        get { return m_idleCD; }
-        set { m_idleCD = value; }
+        get { return idleCD; }
+        set { idleCD = value; }
     }
-    public float AttackTimer
-    {
-        get { return m_attackTimer; }
-        set { m_attackTimer = value; }
-    }
+
 
     public float FleeHealthThreshold
     {
-        get { return m_fleeHealthThreshhold; }
+        get { return fleeHealthThreshhold; }
     }
 
     public bool CanWalk
     {
-        get { return m_canWalk; }
-        set { m_canWalk = value; }
+        get { return canWalk; }
+        set { canWalk = value; }
     }
 
     public bool CanIdle
     {
-        get { return m_canIdle; }
-        set { m_canIdle = value; }
+        get { return canIdle; }
+        set { canIdle = value; }
     }
 
     public bool IsIdling
     {
-        get { return m_isIdling; }
-        set { m_isIdling = value; }
+        get { return isIdling; }
+        set { isIdling = value; }
     }
     public Vector3 Target
     {
-        get { return m_target; }
-        set { m_target = value; }
+        get { return target; }
+        set { target = value; }
     }
 
     public Vector3 Pos
@@ -186,33 +192,28 @@ public class Stats : MonoBehaviour
 
     public Seeker Seeker
     {
-        get { return m_seeker; }
+        get { return seeker; }
     }
 
     public Path Path
     {
-        get { return m_path; }
-        set { m_path = value; }
+        get { return path; }
+        set { path = value; }
     }
     
     public CharacterController CharController
     {
-        get { return m_controller; }
+        get { return characterController; }
     }
-
-    //public Shoot Shoot
-    //{
-    //    get { return GetComponent<Shoot>(); }
-    //}
 
     public GameObject Player
     {
-        get { return m_player; }
+        get { return player; }
     }
 
     public Rigidbody Rigidbody
     {
-        get { return m_rigidBody; }
+        get { return rigidBody; }
     }
 
 }

@@ -3,11 +3,12 @@ using System.Collections;
 
 public class Entity : MonoBehaviour
 {
-    protected Stats m_stats;
+    protected Stats stats;
 	// Use this for initialization
 	protected virtual void Start ()
     {
-        m_stats = this.GetComponent<Stats>();
+        stats = this.GetComponent<Stats>();
+
 	}
 	
 	// Update is called once per frame
@@ -18,9 +19,9 @@ public class Entity : MonoBehaviour
 
     protected virtual void TakeDamage(float damage)
     {
-        m_stats.Health -= damage;
+        this.stats.Health -= damage;
 
-        if (0 >= m_stats.Health)
+        if (0 >= stats.Health)
         {
             Destroy();
         }

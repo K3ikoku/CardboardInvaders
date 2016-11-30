@@ -8,7 +8,7 @@ public class StandOrWalk : Behavior
     {
         //Debug.Log("Checking if walk or stand");
 
-        if (bb.CurrentTargetType != Stats.TargetType.RANDOM)
+        if (bb.CurrentTargetType != Stats.TargetType.RANDOM_LOCATION)
         {
             if (bb.CanWalk)
             {
