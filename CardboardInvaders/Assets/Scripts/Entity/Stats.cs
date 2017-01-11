@@ -7,104 +7,89 @@ using Pathfinding;
 
 public class Stats : MonoBehaviour
 {
-    public enum TargetType
+   public enum TargetTypes
     {
-        UNDEFINED,
-        RANDOM_LOCATION,
+        UNDEFINED, 
+        RANDOM, 
         PLAYER,
-        HUMAN
     }
 
+    [SerializeField]
+    private TargetTypes targetType = TargetTypes.UNDEFINED;
 
+    [SerializeField]
+    private int maxHP;
+    [SerializeField]
+    private int currentHP;
+    [SerializeField]
+    private int damage;
 
-    [Header("Health")]
-    [SerializeField] private float maxHP;
-    [SerializeField] private float currentHealth;
-    [Tooltip("The amount of hp loss until they flee")][SerializeField][Range(0, 100)] private float fleeHealthThreshhold;
+    [SerializeField]
+    private float moveSpeed;
+    [SerializeField]
+    private float defaultSpeed;
+    [SerializeField]
+    private float spotDist;
+    [SerializeField]
+    private float attackRange;
+    [SerializeField]
+    private float attackTimer;
+    [SerializeField]
+    private float idleTimer;
+    [SerializeField]
+    private float idleCD;
+    [SerializeField]
+    private float fleeingThreshold;
 
-    [Header("Attack")]
-    [SerializeField] private float damage;
-    [SerializeField] private float attackSpeed;
+    [SerializeField]
+    private bool isWalking = true;
+    [SerializeField]
+    private bool isIdling = false;
 
-    [Header("Movement")]
-    [Tooltip("The current movespeed. Change run, base or walk speed")][SerializeField] private float moveSpeed;
-    [SerializeField] private float runSpeed;
-    [SerializeField] private float baseSpeed;
-    [SerializeField] private float walkSpeed;
-    [Header("Targeting")]
-    [SerializeField] private TargetType m_currentTargetType = TargetType.UNDEFINED;
-    [SerializeField] private Vector3 target;
-    [SerializeField] private float maxSpotDistance;
-    [SerializeField] private float maxAttackDistance;
-
-    [Header("Parameters for the behavior tree")]
-    [SerializeField] private bool canWalk = true;
-    [SerializeField] private bool isIdling = false;
-    [SerializeField] private bool canIdle = true;
-    [SerializeField] private float idleTimer;
-    [SerializeField] private float idleCD;
-
+    private Vector3 targetPos;
     private Seeker seeker;
     private Path path;
-    private CharacterController characterController;
     private GameObject player;
-    private Rigidbody rigidBody;
-
+    private Rigidbody rigid;
 
     void Awake()
     {
-        if (gameObject.tag != "Player")
+        currentHP = maxHP;
+        seeker = GetComponent<Seeker>();
+        if(seeker == null)
         {
-            Health = MaxHp;
-            seeker = GetComponent<Seeker>();
-            if (Seeker == null)
-            {
-                Debug.Log("Missing seeker");
-            }
+            Debug.Log("Seeker is missing from " + gameObject);
+        }
 
-            characterController = GetComponent<CharacterController>();
-            if (CharController == null)
-            {
-                Debug.Log("Missing character controller");
-            }
-            player = GameObject.FindGameObjectWithTag("Player");
-            if (player == null)
-            {
-                Debug.Log("Missing player");
-            }
-            rigidBody = GetComponent<Rigidbody>();
-            if (rigidBody == null)
-            {
-                Debug.Log("Missing Rigidbody");
-            }
+        //TODO: Implement way to find the monolith
+
+        rigid = GetComponent<Rigidbody>();
+        if(rigid == null)
+        {
+            Debug.Log("Rigidbody is missing from " + gameObject);
         }
     }
 
-    public TargetType CurrentTargetType
+    public TargetTypes TargetType
     {
-        get { return m_currentTargetType; }
-        set { m_currentTargetType = value; }
+        get { return targetType; }
+        set { targetType = value; }
     }
-    
-    public float MaxHp
+
+    public int MaxHP
     {
         get { return maxHP; }
     }
 
-    public float Health
+    public int HP
     {
-        get { return currentHealth; }
-        set { currentHealth = value; }
+        get { return currentHP; }
+        set { currentHP = value; }
     }
 
-    public float Damage
+    public int Damage
     {
         get { return damage; }
-        set { damage = value; }
-    }
-    public float AttackSpeed
-    {
-        get { return attackSpeed; }
     }
 
     public float MoveSpeed
@@ -113,31 +98,25 @@ public class Stats : MonoBehaviour
         set { moveSpeed = value; }
     }
 
-    public float RunSpeed
+    public float DefaultSpeed
     {
-        get { return runSpeed; }
+        get { return defaultSpeed; }
     }
 
-    public float StandardSpeed
+    public float SpotDistance
     {
-        get { return baseSpeed; }
+        get { return spotDist; }
     }
 
-    public float WalkSpeed
+    public float AttackRange
     {
-        get { return walkSpeed; }
+        get { return attackRange; }
     }
-    
-    public float MaxSpotDistance
+    public float AttackTimer
     {
-        get { return maxSpotDistance; }
+        get { return attackTimer; }
+        set { attackTimer = value; }
     }
-
-    public float MaxAttackDistance
-    {
-        get { return maxAttackDistance; }
-    }
-
     public float IdleTimer
     {
         get { return idleTimer; }
@@ -150,22 +129,15 @@ public class Stats : MonoBehaviour
         set { idleCD = value; }
     }
 
-
-    public float FleeHealthThreshold
+    public float FleeingThreshold
     {
-        get { return fleeHealthThreshhold; }
+        get { return fleeingThreshold; }
     }
 
-    public bool CanWalk
+    public bool IsWalking
     {
-        get { return canWalk; }
-        set { canWalk = value; }
-    }
-
-    public bool CanIdle
-    {
-        get { return canIdle; }
-        set { canIdle = value; }
+        get { return isWalking; }
+        set { isWalking = value; }
     }
 
     public bool IsIdling
@@ -173,47 +145,35 @@ public class Stats : MonoBehaviour
         get { return isIdling; }
         set { isIdling = value; }
     }
-    public Vector3 Target
+
+    public Vector3 TargetPosition
     {
-        get { return target; }
-        set { target = value; }
+        get { return targetPos; }
+        set { targetPos = value; }
     }
 
-    public Vector3 Pos
+    public Vector3 Position
     {
         get { return transform.position; }
     }
 
-    public Quaternion Rotation
-    {
-        get { return transform.rotation; }
-        set { transform.rotation = value; }
-    }
-
-    public Seeker Seeker
+    public Seeker GetSeeker
     {
         get { return seeker; }
     }
 
-    public Path Path
+    public Path CurrentPath
     {
         get { return path; }
         set { path = value; }
     }
-    
-    public CharacterController CharController
-    {
-        get { return characterController; }
-    }
 
-    public GameObject Player
-    {
-        get { return player; }
-    }
+    //TODO: Implement Attack function
 
-    public Rigidbody Rigidbody
-    {
-        get { return rigidBody; }
-    }
+    //TODO: Implement function to get the monolith
 
+    public Rigidbody GetRigidbody
+    {
+        get { return rigid;  }
+    }
 }

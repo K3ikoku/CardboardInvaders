@@ -6,70 +6,59 @@ public class Blackboard
 {
     private Stats stats;
 
-    public void SetStats(Stats stats)
+    public void SetStats(Stats value)
     {
-        this.stats = stats;
+        stats = value;
     }
 
-    public Stats.TargetType CurrentTargetType
+    public Stats.TargetTypes TargetType
     {
-        get { return stats.CurrentTargetType; }
-        set { stats.CurrentTargetType = value; }
-    }
-    
-    public float MaxHP
-    {
-        get { return stats.MaxHp; }
+        get { return stats.TargetType; }
+        set { stats.TargetType = value; }
     }
 
-    public float Health
-        {
-        get { return stats.Health; }
-        set { stats.Health = value; }
+    public int MaxHP
+    {
+        get { return stats.MaxHP; }
     }
 
-    public float Damage
+    public int HP
+    {
+        get { return stats.HP; }
+        set { stats.HP = value; }
+    }
+
+    public int Damage
     {
         get { return stats.Damage; }
-        set { stats.Damage = value; }
     }
 
-    public float AttackSpeed
-    {
-        get { return stats.AttackSpeed; }
-    }
-    
     public float MoveSpeed
     {
         get { return stats.MoveSpeed; }
         set { stats.MoveSpeed = value; }
     }
 
-    public float RunSpeed
+    public float DefaultSpeed
     {
-        get { return stats.RunSpeed; }
+        get { return stats.DefaultSpeed; }
     }
 
-    public float StandardSpeed
+    public float SpotDistance
     {
-        get { return stats.StandardSpeed; }
+        get { return stats.SpotDistance; }
     }
 
-    public float WalkSpeed
+    public float AttackRange
     {
-        get { return stats.WalkSpeed; }
+        get { return stats.AttackRange; }
     }
 
-    public float MaxSpotDistance
+    public float AttackTimer
     {
-        get { return stats.MaxSpotDistance; }
+        get { return stats.AttackTimer; }
+        set { stats.AttackTimer = value; }
     }
-
-    public float MaxAttackDistance
-    {
-        get { return stats.MaxAttackDistance; }
-    }
-
 
     public float IdleTimer
     {
@@ -83,21 +72,15 @@ public class Blackboard
         set { stats.IdleCD = value; }
     }
 
-    public float FleeHealthThreshold
+    public float FleeingThreshold
     {
-        get { return stats.FleeHealthThreshold; }
+        get { return stats.FleeingThreshold; }
     }
 
-    public bool CanWalk
+    public bool IsWalking
     {
-        get { return stats.CanWalk; }
-        set { stats.CanWalk = value; }
-    }
-
-    public bool CanIdle
-    {
-        get { return stats.CanIdle; }
-        set { stats.CanIdle = value; }
+        get { return stats.IsWalking; }
+        set { stats.IsWalking = value; }
     }
 
     public bool IsIdling
@@ -106,47 +89,30 @@ public class Blackboard
         set { stats.IsIdling = value; }
     }
 
-    public Vector3 Target
+    public Vector3 TargetPosition
     {
-        get { return stats.Target; }
-        set { stats.Target = value; }
+        get { return stats.TargetPosition; }
+        set { stats.TargetPosition = value; }
     }
 
-    public Vector3 Pos
+    public Vector3 Position
     {
-        get { return stats.Pos; }
+        get { return stats.Position; }
     }
 
-    public Quaternion Rotation
+    public Seeker GetSeeker
     {
-        get { return stats.Rotation; }
-        set { stats.Rotation = value; }
+        get { return stats.GetSeeker; }
     }
 
-    public Seeker Seeker
+    public Path CurrentPath
     {
-        get { return stats.Seeker; }
-    }
-    
-    public Path Path
-    {
-        get { return stats.Path; }
-        set { stats.Path = value; }
+        get { return stats.CurrentPath; }
+        set { stats.CurrentPath = value; }
     }
 
-    public CharacterController CharController
+    public Rigidbody GetRigidBody
     {
-        get { return stats.CharController; }
+        get { return stats.GetRigidbody; }
     }
-
-    public GameObject Player
-    {
-        get { return stats.Player; }
-    }
-
-    public Rigidbody Rigidbody
-    {
-        get { return stats.Rigidbody; }
-    }
-
 }

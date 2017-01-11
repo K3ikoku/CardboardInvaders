@@ -17,11 +17,11 @@ public class Entity : MonoBehaviour
 	
 	}
 
-    protected virtual void TakeDamage(float damage)
+    protected virtual void TakeDamage(int damage)
     {
-        this.stats.Health -= damage;
+        this.stats.HP -= damage;
 
-        if (0 >= stats.Health)
+        if (0 >= stats.HP)
         {
             Destroy();
         }
