@@ -115,4 +115,9 @@ public class Blackboard
     {
         get { return stats.GetRigidbody; }
     }
+
+    public Vector3 GetMapSize
+    {
+        get { return GameObject.FindGameObjectWithTag("Ground").transform.localScale; }
+    }
 }

@@ -7,10 +7,10 @@ public class MoveToPosition : Behavior
     protected override Status Update(Blackboard bb)
     {
         //Debug.Log("Checking in move to position");
-        if (bb.Path != null)
+        if (bb.CurrentPath != null)
         {
             //Check if reached the destination and remove the path
-            if (0 == bb.Path.vectorPath.Count)
+            if (0 == bb.CurrentPath.vectorPath.Count)
             {
                 bb.Path = null;
                 bb.CurrentTargetType = Stats.TargetType.UNDEFINED;
@@ -29,11 +29,11 @@ public class MoveToPosition : Behavior
             Vector3 m_dir = (bb.Path.vectorPath[0] - bb.Pos).normalized;
             m_dir.y = 0;
             m_dir *= bb.MoveSpeed * Time.deltaTime;
-            Rigidbody rb =  bb.Rigidbody;
+            Rigidbody rb = bb.Rigidbody;
             rb.MovePosition(bb.Pos + m_dir);
             bb.Rotation = Quaternion.LookRotation(m_dir);
             return Status.RUNNING;
-            
+
         }
 
 

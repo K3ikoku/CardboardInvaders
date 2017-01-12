@@ -10,7 +10,6 @@ public class SetRandomLocation : Behavior
     
     private Path path;
 
-
     protected override Status Update(Blackboard bb)
     {
         if (bb.TargetType != Stats.TargetTypes.RANDOM)
@@ -18,10 +17,9 @@ public class SetRandomLocation : Behavior
             if (!isPathing && !foundPath)
             {
                 status = Status.RUNNING;
-
-                //TODO: Find a way to make the positioning genereic based on size of the map
                 //Set the target location to a random place inside the game area
-                bb.TargetPosition = new Vector3((Random.Range(-32, 32)), 0, (Random.Range(-12, 12)));
+                Debug.Log(bb.GetMapSize);
+                bb.TargetPosition = new Vector3((Random.Range(-(bb.GetMapSize.x / 2), (bb.GetMapSize.x / 2))), 0, (Random.Range(-(bb.GetMapSize.y / 2), (bb.GetMapSize.y / 2))));
 
                 bb.GetSeeker.StartPath(bb.Position, bb.TargetPosition, OnPathComplete);
 
@@ -35,10 +33,7 @@ public class SetRandomLocation : Behavior
                 path = null;
                 status = Status.SUCCESS;
                 bb.TargetType = Stats.TargetTypes.RANDOM;
-
-
             }
-
         }
 
         else

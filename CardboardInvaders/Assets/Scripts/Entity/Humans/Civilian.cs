@@ -22,6 +22,8 @@ public class Civilian : Entity
         bt.SetRoot(root);
         flee = (Composite)root.Add(new Sequence());
         flee.Add(new IsHpLow());
+        flee.Add(new SetRandomLocation());
+        
 
     }
 	
