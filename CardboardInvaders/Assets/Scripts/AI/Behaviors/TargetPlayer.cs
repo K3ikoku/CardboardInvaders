@@ -1,68 +1,67 @@
-﻿//using UnityEngine;
-//using System.Collections;
-//using Pathfinding;
+﻿using UnityEngine;
+using System.Collections;
+using Pathfinding;
 
-//public class TargetPlayer : Behavior
-//{
-//    private bool m_isPathing = false;
-//    private bool m_foundPath = false;
-//    private Status m_status;
-//    private Path m_path;
+public class TargetPlayer : Behavior
+{
+    private bool isPathing = false;
+    private bool foundPath = false;
+    private Status status;
+    private Path path;
 
-//    protected override Status Update(Blackboard bb)
-//    {
-//        //Debug.Log("Inside targetplayer");
-//        //Debug.Log("Setting player to target");
+    protected override Status Update(Blackboard bb)
+    {
+        if (bb.TargetType != Stats.TargetTypes.PLAYER)
+        {
+            if (!isPathing && !foundPath)
+            {
+                status = Status.RUNNING;
 
-//        if (bb.CurrentTargetType != Stats.TargetType.PLAYER)
-//        {
-//            if (!m_isPathing && !m_foundPath)
-//            {
-//                m_status = Status.RUNNING;
+                //Set the target location to the players position if not already
+                if (bb.TargetPosition != bb.GetMonolith.transform.position)
+                {
+                    bb.TargetPosition = bb.GetMonolith.transform.position;
+                }
 
+                bb.GetSeeker.StartPath(bb.Position, bb.TargetPosition, OnPathComplete);
 
-//                //Set the target location to the players position
-//                bb.Target = bb.Player.transform.position;
-
-//                bb.Seeker.StartPath(bb.Pos, bb.Target, OnPathComplete);
-
-//                m_isPathing = true;
-//            }
-
+                isPathing = true;
+            }
 
 
-//            if (m_foundPath)
-//            {
-//                m_foundPath = false;
-//                bb.Path = m_path;
-//                m_path = null;
-//                m_status = Status.SUCCESS;
-//                bb.CurrentTargetType = Stats.TargetType.PLAYER;
+
+            if (foundPath)
+            {
+                foundPath = false;
+                bb.CurrentPath = path;
+                path = null;
+                status = Status.SUCCESS;
+                bb.TargetType = Stats.TargetTypes.PLAYER;
 
 
-//            }
-//        }
+            }
+        }
 
-//        else
-//        {
-//            m_status = Status.SUCCESS;
-//        }
+        else
+        {
+            status = Status.SUCCESS;
+        }
 
-//        return m_status;
-//    }
+        return status;
+    }
 
 
-//    private void OnPathComplete(Path p)
-//    {
-//        m_isPathing = false;
-//        if (!p.error)
-//        {
-//            m_foundPath = true;
-//            m_path = p;
-//        }
-//        else
-//        {
-//            m_status = Status.FAILURE;
-//        }
-//    }
-//}
+    private void OnPathComplete(Path p)
+    {
+        isPathing = false;
+        if (!p.error)
+        {
+            foundPath = true;
+            path = p;
+        }
+        else
+        {
+            status = Status.FAILURE;
+        }
+    }
+}

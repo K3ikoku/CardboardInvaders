@@ -100,6 +100,12 @@ public class Blackboard
         get { return stats.Position; }
     }
 
+    public Quaternion Rotation
+    {
+        get { return stats.Rotation; }
+        set { stats.Rotation = value; }
+    }
+
     public Seeker GetSeeker
     {
         get { return stats.GetSeeker; }
@@ -118,6 +124,11 @@ public class Blackboard
 
     public Vector3 GetMapSize
     {
-        get { return GameObject.FindGameObjectWithTag("Ground").transform.localScale; }
+        get { return stats.GetMapSize; }
+    }
+
+    public GameObject GetMonolith
+    {
+        get { return stats.GetMonolith; }
     }
 }

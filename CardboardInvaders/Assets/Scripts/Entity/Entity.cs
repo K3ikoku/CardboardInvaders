@@ -8,16 +8,10 @@ public class Entity : MonoBehaviour
 	protected virtual void Start ()
     {
         stats = this.GetComponent<Stats>();
-
 	}
 	
-	// Update is called once per frame
-	void Update ()
-    {
-	
-	}
 
-    protected virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         this.stats.HP -= damage;
 
@@ -25,7 +19,6 @@ public class Entity : MonoBehaviour
         {
             Destroy();
         }
-
     }
 
     protected virtual void Destroy()

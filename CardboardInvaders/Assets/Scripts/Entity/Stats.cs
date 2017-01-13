@@ -51,6 +51,8 @@ public class Stats : MonoBehaviour
     private Path path;
     private GameObject player;
     private Rigidbody rigid;
+    private GameObject ground;
+    private GameObject monolith;
 
     void Awake()
     {
@@ -67,6 +69,18 @@ public class Stats : MonoBehaviour
         if(rigid == null)
         {
             Debug.Log("Rigidbody is missing from " + gameObject);
+        }
+
+        monolith = GameObject.FindGameObjectWithTag("Monolith");
+        if(monolith == null)
+        {
+            Debug.Log("Monolith could not be found");
+        }
+
+        ground = GameObject.FindGameObjectWithTag("Ground");
+        if(ground == null)
+        {
+            Debug.Log("Ground could not be found");
         }
     }
 
@@ -157,6 +171,12 @@ public class Stats : MonoBehaviour
         get { return transform.position; }
     }
 
+    public Quaternion Rotation
+    {
+        get { return transform.rotation; }
+        set { transform.rotation = value; }
+    }
+
     public Seeker GetSeeker
     {
         get { return seeker; }
@@ -170,10 +190,18 @@ public class Stats : MonoBehaviour
 
     //TODO: Implement Attack function
 
-    //TODO: Implement function to get the monolith
-
     public Rigidbody GetRigidbody
     {
         get { return rigid;  }
+    }
+
+    public Vector3 GetMapSize
+    {
+        get { return ground.transform.position; }
+    }
+
+    public GameObject GetMonolith
+    {
+        get { return monolith; }
     }
 }
