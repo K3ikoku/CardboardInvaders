@@ -12,9 +12,9 @@ public class StandOrWalk : Behavior
         {
             if (!bb.IsIdling && !bb.IsWalking)
             {
-                //Debug.Log("Inside standorwalk");
+                Debug.Log("Inside standorwalk");
                 int i = Random.Range(0, 100);
-                //Debug.Log(i);
+                Debug.Log(i);
                 //int i = 100;
                 if (i >= 50)
                 {

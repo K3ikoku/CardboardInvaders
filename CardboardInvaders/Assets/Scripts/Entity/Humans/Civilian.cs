@@ -32,7 +32,8 @@ public class Civilian : Entity
 
         attack = (Composite)root.Add(new Sequence());
         attack.Add(new IsPlayerInRange());
-        attack.Add(new MoveToPosition());
+        attack.Add(new Attack());
+
 
         moveToPlayer = (Composite)root.Add(new Sequence());
         moveToPlayer.Add(new IsPlayerInSight());

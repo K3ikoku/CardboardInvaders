@@ -13,6 +13,7 @@ public class MoveToPosition : Behavior
             {
                 bb.CurrentPath = null;
                 bb.TargetType = Stats.TargetTypes.UNDEFINED;
+                bb.IsWalking = false;
                 return Status.SUCCESS;
             }
 

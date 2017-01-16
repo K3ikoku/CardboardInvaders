@@ -13,6 +13,8 @@ class IsHpLow : Behavior
         {
             //Setting move speed to running speed
             //TODO: Find a suitable number for multiplying defaultspeed with
+            bb.IsWalking = false;
+            bb.IsIdling = false;
             bb.MoveSpeed = bb.DefaultSpeed * 1.5f;
             return Status.SUCCESS;
         }

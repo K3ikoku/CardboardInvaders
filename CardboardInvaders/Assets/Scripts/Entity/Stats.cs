@@ -42,7 +42,7 @@ public class Stats : MonoBehaviour
     private float fleeingThreshold;
 
     [SerializeField]
-    private bool isWalking = true;
+    private bool isWalking = false;
     [SerializeField]
     private bool isIdling = false;
 
@@ -197,7 +197,7 @@ public class Stats : MonoBehaviour
 
     public Vector3 GetMapSize
     {
-        get { return ground.transform.position; }
+        get { return ground.transform.localScale; }
     }
 
     public GameObject GetMonolith
