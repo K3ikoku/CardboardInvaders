@@ -25,7 +25,7 @@ public class StandOrWalk : Behavior
                 }
                 else
                 {
-                    //bb.IsIdling = true;
+                    bb.IsIdling = true;
                     return Status.FAILURE;
                 }
             }
